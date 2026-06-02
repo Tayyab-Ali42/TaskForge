@@ -1,4 +1,4 @@
-import { useTasks } from "../hooks/useTasks";
+import type { ItemType } from "../types";
 
 const DragIcon = () => (
     <svg className="w-4 h-4 text-gray-300" fill="currentColor" viewBox="0 0 24 24">
@@ -39,9 +39,13 @@ const WarningIcon = () => (
     </svg>
 );
 
-export default function TaskCard() {
 
-    const { tasks } = useTasks()
+type taskProps = {
+    tasks: ItemType[]
+}
+
+export default function TaskCard({ tasks }: taskProps) {
+
 
     return (
         <div className=" bg-gray-100 flex flex-col gap-3     p-8">
@@ -50,62 +54,62 @@ export default function TaskCard() {
 
             {tasks.map((task) => {
                 return (
-                    <div>
-                        <div className="w-full max-w-xl bg-white rounded-2xl shadow-sm px-4 py-4 flex items-start gap-3 group ">
-                            {/* Drag Handle */}
-                            <div className="mt-1 shrink-0 cursor-grab">
-                                <DragIcon />
-                            </div>
-
-                            {/* Checkbox */}
-                            <div className="mt-0.5 shrink-0">
-                                <div className="w-5 h-5 rounded-full border-2 border-gray-300 hover:border-blue-400 transition-colors cursor-pointer" />
-                            </div>
-
-                            {/* Content */}
-                            <div className="flex-1 min-w-0">
-                                {/* Title */}
-                                <p className="text-sm font-semibold text-gray-900 leading-snug">
-                                    {task.title}
-                                </p>
-
-                                {/* Description */}
-                                <p className="text-sm text-gray-400 mt-0.5 leading-snug">
-                                    {task.descripton}
-                                </p>
-
-                                {/* Tags Row */}
-                                <div className="flex items-center gap-2 mt-3">
-                                    {/* WORK tag */}
-                                    <span className="text-[11px] font-semibold tracking-wide text-gray-500 bg-gray-100 px-2.5 py-0.5 rounded-md uppercase">
-                                        {task.tag}
-                                    </span>
-
-                                    {/* High priority tag */}
-                                    <span className="flex items-center gap-1 text-[11px] font-semibold text-orange-500 bg-orange-50 border border-orange-200 px-2.5 py-0.5 rounded-full">
-                                        <WarningIcon />
-                                        High
-                                    </span>
-
-                                    {/* Due date */}
-                                    <span className="flex items-center gap-1.5 text-[12px] text-gray-400">
-                                        <CalendarIcon />
-                                        Oct 24, 2024
-                                    </span>
-                                </div>
-                            </div>
-
-                            {/* Action Icons */}
-                            <div className="flex items-center gap-2 mt-1 shrink-0">
-                                <button className="hover:text-blue-500 transition-colors">
-                                    <EditIcon />
-                                </button>
-                                <button className="hover:text-red-500 transition-colors">
-                                    <DeleteIcon />
-                                </button>
-                            </div>
-
+                    <div
+                        key={task.id}
+                        className="w-full max-w-xl bg-white rounded-2xl shadow-sm px-4 py-4 flex items-start gap-3 group ">
+                        {/* Drag Handle */}
+                        <div className="mt-1 shrink-0 cursor-grab">
+                            <DragIcon />
                         </div>
+
+                        {/* Checkbox */}
+                        <div className="mt-0.5 shrink-0">
+                            <div className="w-5 h-5 rounded-full border-2 border-gray-300 hover:border-blue-400 transition-colors cursor-pointer" />
+                        </div>
+
+                        {/* Content */}
+                        <div className="flex-1 min-w-0">
+                            {/* Title */}
+                            <p className="text-sm font-semibold text-gray-900 leading-snug">
+                                {task.title}
+                            </p>
+
+                            {/* Description */}
+                            <p className="text-sm text-gray-400 mt-0.5 leading-snug">
+                                {task.description}
+                            </p>
+
+                            {/* Tags Row */}
+                            <div className="flex items-center gap-2 mt-3">
+                                {/* WORK tag */}
+                                <span className="text-[11px] font-semibold tracking-wide text-gray-500 bg-gray-100 px-2.5 py-0.5 rounded-md uppercase">
+                                    {task.tag}
+                                </span>
+
+                                {/* High priority tag */}
+                                <span className="flex items-center gap-1 text-[11px] font-semibold text-orange-500 bg-orange-50 border border-orange-200 px-2.5 py-0.5 rounded-full">
+                                    <WarningIcon />
+                                    High
+                                </span>
+
+                                {/* Due date */}
+                                <span className="flex items-center gap-1.5 text-[12px] text-gray-400">
+                                    <CalendarIcon />
+                                    Oct 24, 2024
+                                </span>
+                            </div>
+                        </div>
+
+                        {/* Action Icons */}
+                        <div className="flex items-center gap-2 mt-1 shrink-0">
+                            <button className="hover:text-blue-500 transition-colors">
+                                <EditIcon />
+                            </button>
+                            <button className="hover:text-red-500 transition-colors">
+                                <DeleteIcon />
+                            </button>
+                        </div>
+
                     </div>
 
                 )
