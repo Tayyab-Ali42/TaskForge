@@ -1,7 +1,7 @@
 export type ItemType = {
     id: string
     title: string
-    descripton: string
+    description: string
     isCompleted: boolean
     createdAt: string
     tag: string
