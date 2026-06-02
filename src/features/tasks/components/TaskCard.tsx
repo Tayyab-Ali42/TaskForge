@@ -42,17 +42,15 @@ const WarningIcon = () => (
 
 type taskProps = {
     tasks: ItemType[]
+    deleteTask: (id: string) => void
 }
 
-export default function TaskCard({ tasks }: taskProps) {
+export default function TaskCard({ tasks, deleteTask }: taskProps) {
 
 
     return (
         <div className=" bg-gray-100 flex flex-col gap-3     p-8">
-
-
-
-            {tasks.map((task) => {
+            {tasks.length === 0 ? <h1 className="text-3xl font-bold ">There is no tasks yet</h1> : tasks.map((task) => {
                 return (
                     <div
                         key={task.id}
@@ -102,10 +100,12 @@ export default function TaskCard({ tasks }: taskProps) {
 
                         {/* Action Icons */}
                         <div className="flex items-center gap-2 mt-1 shrink-0">
-                            <button className="hover:text-blue-500 transition-colors">
+                            <button className="cursor-pointer hover:text-blue-500 transition-colors">
                                 <EditIcon />
                             </button>
-                            <button className="hover:text-red-500 transition-colors">
+                            <button
+                                onClick={() => deleteTask(task.id)}
+                                className="cursor-pointer hover:text-red-500 transition-colors">
                                 <DeleteIcon />
                             </button>
                         </div>
