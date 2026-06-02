@@ -32,6 +32,9 @@ export function useTasks() {
         }
         setTasks((prev) => [...prev, newTask])
     }
+
+
+
     const deleteTask = (id: string): void => {
         setTasks((prev) => prev.filter((task) => task.id !== id))
     }
