@@ -47,14 +47,25 @@ export function useTasks() {
     }
 
 
+    const editTitle = (newTitle: string, id: string) => {
+        setTasks(prev => prev.map(task =>
+            task.id === id ? { ...task, title: newTitle } : task
+        ))
+    }
+
+
     useEffect(() => {
         localStorage.setItem("tasks", JSON.stringify(tasks))
     }, [tasks])
+
+
+
 
     return {
         addTask,
         toggleTask,
         deleteTask,
-        tasks
+        tasks,
+        editTitle
     }
 }
